@@ -6,20 +6,46 @@ public class CreateGrid : MonoBehaviour
 {
     public GameObject SpawnPrefab;
     public int NumberOfCells;
+    public float offsetX;
+    public float offsetY;
+    public static Dictionary<Vector2, Transform> Positions = new Dictionary<Vector2, Transform>();
 
     private void Start()
     {
-        int x=0;
+        int x = 0;
         int y = 0;
+        int tempI=0;
+        Vector3 lastPosition=Vector3.zero;
         int length = NumberOfCells * NumberOfCells;
         for (int i = 0; i < length; i++)
         {
-            if (x >= NumberOfCells) return;
-            if (y >= NumberOfCells) { x++; y = 0; }
+            if(tempI>=NumberOfCells)
+            {
+                tempI=0;
+                x++;
+                y = 0;
+                lastPosition += new Vector3(0, 0, 1 + offsetY);
+                lastPosition = new Vector3(0, lastPosition.y,lastPosition.z);
+            }
             GameObject cube=Instantiate(SpawnPrefab);
-            cube.transform.position = new Vector3(x, 0, y);
+            cube.transform.position = lastPosition;
+            Positions.Add(new Vector2(x,y),cube.transform);
+            lastPosition = cube.transform.position + new Vector3(1 + offsetX, 0, 0);
+            tempI++;
+            x++;
             y++;
         }
+    }
+    //[0,0]
+    //[4,4]
+    public bool tryGetPosition(Vector2 cordinate, out Vector3 position)
+    {
+        position = Vector3.zero;
+        if (Positions.TryGetValue(cordinate, out Transform trans)){
+            position = trans.position;
+            return true;
+        }
+        return false;
     }
 
 }
