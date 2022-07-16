@@ -13,7 +13,7 @@ public class PlaneHandler : MonoBehaviour
     float Duration;
     public GameObject Cube;
     public float WaitTime;
-    Timer Timer = new Timer();
+    Timer Timer;
     public int index;
     int iteration;
     bool IsRotationDone;
@@ -30,6 +30,8 @@ public class PlaneHandler : MonoBehaviour
     }
     public void initializePlane(PlaneBehaviour planeBehaviour, int rotationAngle, float duration, float waitTime, string tagForCollision)
     {
+        Timer = new Timer();
+        Timer.OnTimerDone += onTimerDone;
         WaitTime = waitTime;
         PlaneBehaviour = planeBehaviour;
         RoatationAngle = rotationAngle;
@@ -91,7 +93,7 @@ public class PlaneHandler : MonoBehaviour
     }
     public void startTimer()
     {
-        Timer.startTimer(null, onTimerDone, WaitTime, true, true);
+        Timer.startTimer(WaitTime, true, true);
     }
     public void stopCube()
     {
@@ -99,11 +101,13 @@ public class PlaneHandler : MonoBehaviour
     }
     public void onTimerDone()
     {
+        Timer.pauseTimer();
         rotateCubeWithCallback(
             () =>{
                 if (iteration > 0)
                 {
                     Faces[index++].showTextFace(iteration--.ToString());
+                    Timer.playTimer();
                 }
                 else if(iteration==0)
                 {
@@ -111,6 +115,7 @@ public class PlaneHandler : MonoBehaviour
                         Faces[index].hideAll();
                     else Faces[index].showSpriteFace(PlaneBehaviour.PlaneFunctionality.Texture);
                     iteration--;
+                    Timer.playTimer();
                 }
                 else if (iteration == -1)
                 {
