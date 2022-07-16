@@ -15,6 +15,7 @@ public class CreateGrid : MonoBehaviour
     public float offsetX;
     public float offsetY;
     public Dictionary<Vector2, Transform> Positions = new Dictionary<Vector2, Transform>();
+ 
 
     private void Start()
     {
@@ -33,8 +34,9 @@ public class CreateGrid : MonoBehaviour
                 lastPosition += new Vector3(1 + offsetX, 0, 0);
                 lastPosition = new Vector3(lastPosition.x, lastPosition.y,0);
             }
-            GameObject cube=Instantiate(SpawnPrefab);
+            GameObject cube=Instantiate(SpawnPrefab, transform);
             cube.transform.position = lastPosition;
+
             Positions.Add(new Vector2(x,y),cube.transform);
             lastPosition = cube.transform.position + new Vector3(0, 0, 1 + offsetY);
             tempI++;
