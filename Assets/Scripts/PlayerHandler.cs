@@ -9,7 +9,7 @@ public class PlayerHandler : MonoBehaviour
     // Start is called before the first frame update
     public Vector2 Cordinate;
     public float DurationMove;
-    public AnimationCurve Curve;
+    public AnimationCurve Curve= new AnimationCurve();
     public bool CanMove=true;
     void Start()
     {
