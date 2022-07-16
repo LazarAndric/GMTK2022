@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class CreateGrid : MonoBehaviour
 {
+    public static CreateGrid Instance;
+    private void Awake()
+    {
+            if(Instance==null)
+                Instance = this;
+    }
     public GameObject SpawnPrefab;
     public int NumberOfCells;
     public float offsetX;
     public float offsetY;
-    public static Dictionary<Vector2, Transform> Positions = new Dictionary<Vector2, Transform>();
+    public Dictionary<Vector2, Transform> Positions = new Dictionary<Vector2, Transform>();
 
     private void Start()
     {
@@ -24,15 +30,14 @@ public class CreateGrid : MonoBehaviour
                 tempI=0;
                 x++;
                 y = 0;
-                lastPosition += new Vector3(0, 0, 1 + offsetY);
-                lastPosition = new Vector3(0, lastPosition.y,lastPosition.z);
+                lastPosition += new Vector3(1 + offsetX, 0, 0);
+                lastPosition = new Vector3(lastPosition.x, lastPosition.y,0);
             }
             GameObject cube=Instantiate(SpawnPrefab);
             cube.transform.position = lastPosition;
             Positions.Add(new Vector2(x,y),cube.transform);
-            lastPosition = cube.transform.position + new Vector3(1 + offsetX, 0, 0);
+            lastPosition = cube.transform.position + new Vector3(0, 0, 1 + offsetY);
             tempI++;
-            x++;
             y++;
         }
     }
