@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public GAMESTATE CurrentState;
+    public GAMESTATE InitState;
+    private GAMESTATE CurrentState;
     public Action<GAMESTATE, GAMESTATE> OnStateChange;
     public Action<int> OnLifeChange;
     public float TimerDuration;
@@ -25,6 +26,18 @@ public class GameHandler : MonoBehaviour
     int Life;
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Timer.playTimer();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            addLife();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            removeLife();
+        }
         if (lastLife != Life)
         {
             lastLife = Life;
@@ -34,6 +47,8 @@ public class GameHandler : MonoBehaviour
     }
     public int getLife() => Life;
     public void setLife(int life) => Life=life;
+    public void addLife() => Life++;
+    public void removeLife() => Life--;
     public void subscribeToTimer(Action<float> action) => Timer.OnTimerUpdate+= action;
     public void setTimer(float timer) => Timer.setTimer(timer);
     public void changeTimer(float timer) => Timer.changeTimer(timer);
@@ -58,5 +73,6 @@ public enum GAMESTATE
     Init,
     UI,
     Gameplay,
+    Pause,
     GameOver
 }

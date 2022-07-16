@@ -105,10 +105,6 @@ public class GridHandler : MonoBehaviour
 
     private List<Waypoint> waypoitns = new List<Waypoint>();
 
-    private void Start()
-    {
-        
-    }
     //[0,0]
     //[4,4]
     public bool tryGetPosition(Vector2 cordinate, out Vector3 position)
