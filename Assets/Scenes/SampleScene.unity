@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cordinate: {x: 0, y: 0}
-  DurationMove: 2
+  DurationMove: 1
   Curve:
     serializedVersion: 2
     m_Curve:
@@ -418,11 +418,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0
-      outSlope: -0
+      inSlope: 0.058814775
+      outSlope: 0.058814775
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.028508842
+      inWeight: 0.28070182
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
