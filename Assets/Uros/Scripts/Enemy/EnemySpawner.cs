@@ -17,14 +17,12 @@ public class EnemySpawner : MonoBehaviour
     {
         staticPrefab = enemyPrefab;
         plane =   GameObject.FindGameObjectWithTag("Plane");
-        int numberOfCells = plane.transform.childCount - 1;
+        numberOfCells = plane.transform.childCount - 1;
         
         
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            int random = Random.Range(0, numberOfCells);
-            GameObject enemy = Instantiate<GameObject>(enemyPrefab, plane.transform.GetChild(random).position, Quaternion.identity);
-            enemies.Add(enemy);        
+            SpawnEnemy();      
         }
     }
     
@@ -38,7 +36,14 @@ public class EnemySpawner : MonoBehaviour
     public static void SpawnEnemy()
     {
         int random = Random.Range(0, numberOfCells);
+        Waypoint targetWaypoint = plane.transform.GetChild(random).GetComponent<Waypoint>();
+        if (targetWaypoint.Occupied == true)
+        {
+            SpawnEnemy();
+            return;
+        }
         GameObject enemy = Instantiate<GameObject>(staticPrefab, plane.transform.GetChild(random).position, Quaternion.identity);
+        targetWaypoint.Occupied = true;
         enemies.Add(enemy);
     }
 

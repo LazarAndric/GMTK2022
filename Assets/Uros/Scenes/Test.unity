@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 860890476}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,11 +432,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7793db355f0fd9468b854e3370361b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnPrefab: {fileID: 8779032475098983649, guid: 9054273ace1ed154d9672a52603a0f0f,
+  TagForCollision: Player
+  PlaneBehaviours: []
+  SurpriseTexture: {fileID: 0}
+  Explosion: {fileID: 0}
+  MoveTo: {fileID: 0}
+  AddTimeTexture: {fileID: 0}
+  RemoveTimeTexture: {fileID: 0}
+  AddLifeTexture: {fileID: 0}
+  RemoveLifeTexture: {fileID: 0}
+  SpawnEnemyTexture: {fileID: 0}
+  DestroyEnemyTexture: {fileID: 0}
+  SpawnPrefab: {fileID: 5180937299108964870, guid: 9054273ace1ed154d9672a52603a0f0f,
     type: 3}
   NumberOfCells: 6
-  offsetX: 0
-  offsetY: 0
+  offsetX: 0.1
+  offsetY: 0.1
+  RotationAngle: -90
+  Duration: 0.5
+  WaitTime: 1
 --- !u!1 &1872818386
 GameObject:
   m_ObjectHideFlags: 0

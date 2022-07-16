@@ -23,4 +23,5 @@ public class Waypoint : MonoBehaviour
         get { return id;}
         set { id = value;}
     }
+    public bool Occupied { get; set; }
 }

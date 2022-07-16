@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
-    private void FindTargert()
+    private void FindTarget()
     {
         int randomNode;
         thisNode = GraphBuilder.Graph.Find(waypoint);
@@ -41,6 +41,7 @@ public class EnemyMovement : MonoBehaviour
             int[] rand = { random1, random2 };
             int randIndex = Random.Range(0,2);
             randomNode = rand[randIndex];
+            
         }
         
         GoToTarget(randomNode);
@@ -49,19 +50,22 @@ public class EnemyMovement : MonoBehaviour
     private void GoToTarget(int randomNode)
     {
         Waypoint targetWaypoint = thisNode.Neighbors[randomNode].Value;
-        canMove = false;
-        transform.DOMove(targetWaypoint.transform.position, moveSpeed).OnComplete(() => NextTargert());
-    }
-
-    private void NextTargert()
-    {
-        canMove = true;
-        FindTargert();
+        if (targetWaypoint.Occupied == false)
+        {
+            canMove = false;
+            transform.DOMove(targetWaypoint.transform.position, moveSpeed).OnComplete(() => FindTarget());
+            targetWaypoint.Occupied = true;
+            thisNode.Value.Occupied = false;
+        }
+        else
+        {
+            Invoke("FindTarget", 0.02f);
+        }
     }
 
     private void Start()
     {
-        FindTargert();
+        FindTarget();
     }
     //private void GoToNextTarget()
     //{
