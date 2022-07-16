@@ -36,8 +36,8 @@ public class GraphBuilder :MonoBehaviour
                 if (neighbour == graphNode)
                     continue;
                 // if node is 1 place from current node and not diagonal then add
-                if ((Mathf.Abs(neighbour.Value.Position.z - graphNode.Value.Position.z) <= 1 + offsetY && Mathf.Abs(neighbour.Value.Position.x - graphNode.Value.Position.x) == 0)
-                   || Mathf.Abs(neighbour.Value.Position.z - graphNode.Value.Position.z) == 0 && Mathf.Abs(neighbour.Value.Position.x - graphNode.Value.Position.x) <= 1 + offsetX)
+                if ((Mathf.Abs(neighbour.Value.Position.z - graphNode.Value.Position.z) <= 1 + offsetY * 2 && Mathf.Abs(neighbour.Value.Position.x - graphNode.Value.Position.x) == 0)
+                   || Mathf.Abs(neighbour.Value.Position.z - graphNode.Value.Position.z) == 0 && Mathf.Abs(neighbour.Value.Position.x - graphNode.Value.Position.x) <= 1 + offsetX * 2)
                 {
                     graphNode.AddNeighbor(neighbour, 1);
                 }
