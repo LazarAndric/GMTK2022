@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckGameOver : MonoBehaviour
 {
+    public static event Action OnGameOver;
     [SerializeField]
     int idOfEndNode = 33;
 
@@ -56,6 +58,7 @@ public class CheckGameOver : MonoBehaviour
             {
                 if (searchNode.Distance > 100)
                 {
+                    OnGameOver?.Invoke();
                     print("Game over");
                     return true;
                 }
