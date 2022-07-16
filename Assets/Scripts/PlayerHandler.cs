@@ -59,5 +59,5 @@ public class PlayerHandler : MonoBehaviour
         CanMove = false;
         transform.DOMove(position, DurationMove).SetEase(Curve).OnComplete(()=>CanMove=true);
     }
-    public bool tryGetPosition(Vector2 cordinate, out Vector3 position) => CreateGrid.Instance.tryGetPosition(cordinate, out position);
+    public bool tryGetPosition(Vector2 cordinate, out Vector3 position) => GridHandler.Instance.tryGetPosition(cordinate, out position);
 }

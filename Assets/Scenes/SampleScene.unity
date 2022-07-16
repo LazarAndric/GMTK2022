@@ -524,15 +524,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7793db355f0fd9468b854e3370361b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TagForCollision: Player
   PlaneBehaviours: []
-  SurpriseSprite: {fileID: 0}
-  Explosion: {fileID: 0}
-  AddTimeSprite: {fileID: 0}
-  RemoveTimeSprite: {fileID: 0}
-  AddLifeSprite: {fileID: 0}
-  RemoveLifeSprite: {fileID: 0}
-  SpawnEnemySprite: {fileID: 0}
-  DestroyEnemySprite: {fileID: 0}
+  SurpriseTexture: {fileID: 2800000, guid: e5bac369cdaba3242acd1d7e4f9b5651, type: 3}
+  Explosion: {fileID: 2800000, guid: 7305d0b7c8532f443b9416917cbd233a, type: 3}
+  MoveTo: {fileID: 0}
+  AddTimeTexture: {fileID: 0}
+  RemoveTimeTexture: {fileID: 0}
+  AddLifeTexture: {fileID: 2800000, guid: 28361ce18d59d404195936ff1b97cd8b, type: 3}
+  RemoveLifeTexture: {fileID: 0}
+  SpawnEnemyTexture: {fileID: 0}
+  DestroyEnemyTexture: {fileID: 0}
   SpawnPrefab: {fileID: 5180937299108964870, guid: 9054273ace1ed154d9672a52603a0f0f,
     type: 3}
   NumberOfCells: 6
@@ -540,6 +542,7 @@ MonoBehaviour:
   offsetY: 0.1
   RotationAngle: -90
   Duration: 0.5
+  WaitTime: 1
 --- !u!4 &525819346
 Transform:
   m_ObjectHideFlags: 0
@@ -719,7 +722,7 @@ GameObject:
   - component: {fileID: 2146531907}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

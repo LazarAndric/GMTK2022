@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateGrid : MonoBehaviour
+public class GridHandler : MonoBehaviour
 {
-    public static CreateGrid Instance;
+    public string TagForCollision;
+    public static GridHandler Instance;
     public List<PlaneBehaviour> PlaneBehaviours = new List<PlaneBehaviour>();
     public Texture SurpriseTexture;
     public Texture Explosion;
@@ -81,7 +82,7 @@ public class CreateGrid : MonoBehaviour
                 lastPosition = new Vector3(lastPosition.x, lastPosition.y, 0);
             }
             PlaneHandler cube = Instantiate(SpawnPrefab, transform);
-            cube.initializePlane(PlaneBehaviours[Random.Range(0, PlaneBehaviours.Count)], RotationAngle, Duration, WaitTime);
+            cube.initializePlane(PlaneBehaviours[Random.Range(0, PlaneBehaviours.Count)], RotationAngle, Duration, WaitTime, TagForCollision);
             cube.transform.position = lastPosition;
             AddPlaneToGraph(cube.gameObject, i);
             Positions.Add(new Vector2(x, y), cube.transform);

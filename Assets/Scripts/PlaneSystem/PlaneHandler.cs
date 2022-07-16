@@ -28,12 +28,13 @@ public class PlaneHandler : MonoBehaviour
             index = Faces.Count - 1;
         }    
     }
-    public void initializePlane(PlaneBehaviour planeBehaviour, int rotationAngle, float duration, float waitTime)
+    public void initializePlane(PlaneBehaviour planeBehaviour, int rotationAngle, float duration, float waitTime, string tagForCollision)
     {
         WaitTime = waitTime;
         PlaneBehaviour = planeBehaviour;
         RoatationAngle = rotationAngle;
         Duration = duration;
+        ColliderControl.setTag(tagForCollision);
         ColliderControl.TriggerEnter += ColliderControl_TriggerEnter;
         ColliderControl.TriggerExit += ColliderControl_TriggerExit;
         iteration = PlaneBehaviour.PlaneFunctionality.Iteration;
