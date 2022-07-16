@@ -15,7 +15,8 @@ public class CreateGrid : MonoBehaviour
     public float offsetX;
     public float offsetY;
     public Dictionary<Vector2, Transform> Positions = new Dictionary<Vector2, Transform>();
- 
+
+    private List<Waypoint> waypoitns = new List<Waypoint>();
 
     private void Start()
     {
@@ -36,12 +37,13 @@ public class CreateGrid : MonoBehaviour
             }
             GameObject cube=Instantiate(SpawnPrefab, transform);
             cube.transform.position = lastPosition;
-
+            AddPlaneToGraph(cube, i);
             Positions.Add(new Vector2(x,y),cube.transform);
             lastPosition = cube.transform.position + new Vector3(0, 0, 1 + offsetY);
             tempI++;
             y++;
         }
+        GraphBuilder.CreateGraph(waypoitns, offsetX, offsetY);
     }
     //[0,0]
     //[4,4]
@@ -54,5 +56,10 @@ public class CreateGrid : MonoBehaviour
         }
         return false;
     }
-
+    private void AddPlaneToGraph(GameObject cube, int id)
+    {
+        cube.AddComponent<Waypoint>();
+        cube.GetComponent<Waypoint>().Id = id;
+        waypoitns.Add(cube.GetComponent<Waypoint>());
+    }
 }
