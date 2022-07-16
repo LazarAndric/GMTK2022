@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 73689a34eaa7aca41852a8233db4b76a,
         type: 3}
       propertyPath: m_Name
-      value: Igrac
+      value: Igrac Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1410179648333081486, guid: 73689a34eaa7aca41852a8233db4b76a,
         type: 3}
@@ -79,3 +79,29 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: df010b7f36bae8b4782e93c7dd9e4cd5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73689a34eaa7aca41852a8233db4b76a, type: 3}
+--- !u!1 &8110624716312820595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 73689a34eaa7aca41852a8233db4b76a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8957611163396933154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7315519451720367867
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110624716312820595}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12b0da2aeffca4c44a11b0b5d1eada34, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
