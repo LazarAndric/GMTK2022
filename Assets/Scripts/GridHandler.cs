@@ -30,21 +30,21 @@ public class GridHandler : MonoBehaviour
         PlaneType surpriseType = new PlaneType(Type.Surprise, SurpriseTexture);
 
         //PlaneFunctionality initialization
-        PlaneFunctionality addTimeNormalFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, () => Debug.Log("Add time"), 2, false);
-        PlaneFunctionality emptyFunctionality = new PlaneFunctionality(Functionality.Empty, null, () => Debug.Log("Its empty"), 0, false);
-        PlaneFunctionality emptyNormalFunctionality = new PlaneFunctionality(Functionality.Empty, null, () => Debug.Log("Its empty"), 3, false);
-        PlaneFunctionality removeTimeNormalFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, () => Debug.Log("Remove time"), 3, false);
-        PlaneFunctionality timer1Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, () => Debug.Log("Exploded"), 1, true);
-        PlaneFunctionality timer2Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, () => Debug.Log("Exploded"), 2, true);
-        PlaneFunctionality timer3Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, () => Debug.Log("Exploded"), 3, true);
-        PlaneFunctionality deathFunctionality = new PlaneFunctionality(Functionality.Death, Explosion, () => Debug.Log("Exploded"), 0, true);
-        PlaneFunctionality moveToFunctionality = new PlaneFunctionality(Functionality.MoveTo, MoveTo, () => Debug.Log("Move to"), 0, false);
-        PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, () => Debug.Log("Add time"), 0, false);
-        PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, () => Debug.Log("Remove time"), 0, false);
-        PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, () => Debug.Log("Add life"), 0, false);
-        PlaneFunctionality removeLifeFunctionality = new PlaneFunctionality(Functionality.RemoveLife, RemoveLifeTexture, () => Debug.Log("Remove life"), 0, false);
-        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, AddLifeTexture, () => Debug.Log("Spawn enemy"), 0, false);
-        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, RemoveLifeTexture, () => Debug.Log("Destroy enemy"), 0, false);
+        PlaneFunctionality addTimeNormalFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => Debug.Log("Add time"), 2, false);
+        PlaneFunctionality emptyFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => Debug.Log("Its empty"), 0, false);
+        PlaneFunctionality emptyNormalFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => Debug.Log("Its empty"), 3, false);
+        PlaneFunctionality removeTimeNormalFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => Debug.Log("Remove time"), 3, false);
+        PlaneFunctionality timer1Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 1, true);
+        PlaneFunctionality timer2Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 2, true);
+        PlaneFunctionality timer3Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 3, true);
+        PlaneFunctionality deathFunctionality = new PlaneFunctionality(Functionality.Death, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 0, true);
+        PlaneFunctionality moveToFunctionality = new PlaneFunctionality(Functionality.MoveTo, MoveTo, (PlaneHandler plane) => Debug.Log("Move to"), 0, false);
+        PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => Debug.Log("Add time"), 0, false);
+        PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => Debug.Log("Remove time"), 0, false);
+        PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => Debug.Log("Add life"), 0, false);
+        PlaneFunctionality removeLifeFunctionality = new PlaneFunctionality(Functionality.RemoveLife, RemoveLifeTexture, (PlaneHandler plane) => Debug.Log("Remove life"), 0, false);
+        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, AddLifeTexture, (PlaneHandler plane) => Debug.Log("Spawn enemy"), 0, false);
+        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, RemoveLifeTexture, (PlaneHandler plane) => Debug.Log("Destroy enemy"), 0, false);
 
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeNormalFunctionality, normalType));
         PlaneBehaviours.Add(new PlaneBehaviour(emptyNormalFunctionality, normalType));

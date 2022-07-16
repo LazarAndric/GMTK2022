@@ -17,6 +17,7 @@ public class PlaneHandler : MonoBehaviour
     public int index;
     int iteration;
     bool IsRotationDone;
+    public GameObject CurrentObject;
     public void stayInBound()
     {
         if (index >= Faces.Count)
@@ -74,11 +75,13 @@ public class PlaneHandler : MonoBehaviour
 
     private void ColliderControl_TriggerExit()
     {
+        CurrentObject = null;
         stopCube();
     }
 
     private void ColliderControl_TriggerEnter(GameObject obj)
     {
+        CurrentObject = obj;
         startCube();
     }
     public void startCube()
@@ -86,7 +89,7 @@ public class PlaneHandler : MonoBehaviour
         if (IsRotationDone) return;
         if (PlaneBehaviour.PlaneType.Type == Type.Surprise)
         {
-            rotateCubeWithCallback(PlaneBehaviour.PlaneFunctionality.OnDone);
+            rotateCubeWithCallback(()=>PlaneBehaviour.PlaneFunctionality.OnDone(this));
             IsRotationDone = true;
         }
         else startTimer();
@@ -120,7 +123,7 @@ public class PlaneHandler : MonoBehaviour
                 else if (iteration == -1)
                 {
                     Timer.interuptTimer();
-                    PlaneBehaviour.PlaneFunctionality.OnDone?.Invoke();
+                    PlaneBehaviour.PlaneFunctionality.OnDone?.Invoke(this);
                     IsRotationDone = true;
                 }
             });
@@ -155,11 +158,11 @@ public struct PlaneFunctionality
 {
     public Functionality Functionality;
     public Texture Texture;
-    public Action OnDone;
+    public Action<PlaneHandler> OnDone;
     public int Iteration;
     public bool IsDestroy;
 
-    public PlaneFunctionality(Functionality functionality, Texture texture, Action onDone, int iteration, bool isDestroy)
+    public PlaneFunctionality(Functionality functionality, Texture texture, Action<PlaneHandler> onDone, int iteration, bool isDestroy)
     {
         Functionality = functionality;
         Texture = texture;
