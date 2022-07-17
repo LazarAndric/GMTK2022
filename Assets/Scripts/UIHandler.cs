@@ -18,6 +18,7 @@ public class UIHandler : MonoBehaviour
         GameHandler.Instance.OnStateChange += onStateChange;
         GameHandler.Instance.subscribeToTimer(onTimerUpdate);
         GameHandler.Instance.OnLifeChange += onLifeChange;
+        onLifeChange(GameHandler.Instance.getLife());
     }
 
     private void onStateChange(GAMESTATE arg1, GAMESTATE arg2)
@@ -43,12 +44,11 @@ public class UIHandler : MonoBehaviour
 
     private void onLifeChange(int life)
     {
-        LifeLabel.text = string.Format("x {0}", (int)life);
+        LifeLabel.text = string.Format("x {0}", life);
     }
 
     private void onTimerUpdate(float timer)
     {
-        var time = DateTime.Parse(timer.ToString());
         TimerLabel.text = string.Format("TIMER: {0}", (int)timer);
     }
 }

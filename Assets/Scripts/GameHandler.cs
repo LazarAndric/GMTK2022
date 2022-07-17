@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
     public float TimerDuration;
     private Timer Timer;
     public static GameHandler Instance;
+    public int NumberOfLife;
     private void Awake()
     {
         if (Instance == null)
@@ -19,6 +20,8 @@ public class GameHandler : MonoBehaviour
         Timer.OnTimerDone += onTimerDone;
         Timer.OnTimerUpdate += onTimerUpdate;
         CheckGameOver.OnGameOver += CheckGameOver_OnGameOver;
+        Timer.playTimer();
+        Life = NumberOfLife;
     }
 
     private void CheckGameOver_OnGameOver() => changeState(GAMESTATE.GameOver);
@@ -26,18 +29,6 @@ public class GameHandler : MonoBehaviour
     int Life;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Timer.playTimer();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            addLife();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            removeLife();
-        }
         if (lastLife != Life)
         {
             lastLife = Life;
@@ -70,6 +61,7 @@ public class GameHandler : MonoBehaviour
 }
 public enum GAMESTATE
 {
+    Start,
     Init,
     UI,
     Gameplay,
