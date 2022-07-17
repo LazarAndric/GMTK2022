@@ -83,5 +83,6 @@ public enum GAMESTATE
     Start,
     Init,
     Gameplay,
-    GameOver
+    GameOver,
+    Won
 }
