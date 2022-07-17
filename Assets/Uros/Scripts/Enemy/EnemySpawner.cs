@@ -13,19 +13,16 @@ public class EnemySpawner : MonoBehaviour
     static GameObject plane;
     static List<GameObject> enemies = new List<GameObject>();
     static int numberOfCells;
-    private void Start()
+    public void spawnEnemies()
     {
         staticPrefab = enemyPrefab;
-        plane =   GameObject.FindGameObjectWithTag("Plane");
+        plane = GameObject.FindGameObjectWithTag("Plane");
         numberOfCells = plane.transform.childCount - 1;
-        
-        
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            SpawnEnemy();      
+            SpawnEnemy();
         }
     }
-    
     public static void DestroyEnemy()
     {
         if(enemies.Count > 0)

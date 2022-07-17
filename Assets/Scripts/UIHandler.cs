@@ -23,10 +23,6 @@ public class UIHandler : MonoBehaviour
 
     private void onStateChange(GAMESTATE arg1, GAMESTATE arg2)
     {
-        if (arg1 == GAMESTATE.Pause && arg2 == GAMESTATE.Gameplay)
-            hidePanel(PausePanel);
-        if (arg1==GAMESTATE.Gameplay && arg2==GAMESTATE.Pause)
-            showPanel(PausePanel);
         if (arg2 == GAMESTATE.GameOver)
             showPanel(GameOverPanel);
     }

@@ -6,26 +6,46 @@ using DG.Tweening;
 
 public class PlayerHandler : MonoBehaviour
 {
-    public Vector3 StartPosition;
+    public Vector3 EndPosition;
     // Start is called before the first frame update
     public AnimationHandler Animate;
+    public Vector2 StartCordinate;
     public Vector2 Cordinate;
     public float DurationMove;
     public AnimationCurve Curve= new AnimationCurve();
     public bool CanMove=true;
     public Rigidbody Rigidbody;
+    private void Start()
+    {
+        GameHandler.Instance.OnStateChange += onStateChange;
+    }
+    bool IsDone;
+    private void onStateChange(GAMESTATE arg1, GAMESTATE arg2)
+    {
+        if (GAMESTATE.Gameplay == arg2)
+        {
+            IsDone = false;
+            spawnPlayer();
+        }
+        if(GAMESTATE.GameOver == arg2)
+        {
+            transform.position = EndPosition;
+            IsDone = true;
+        }
+    }
 
     [SerializeField]
     float rotationDuration = 0.3f;
-    void Start()
+    public void spawnPlayer()
     {
-        transform.position= Vector3.zero;
-        StartPosition= transform.position;
+        Cordinate = StartCordinate;
+        transform.position = Vector3.zero;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            GameHandler.Instance.removeLife();
             Animate.startAnimation(AnimationType.Death, onAnimationDone);
             //animation
             //Destroy(other.gameObject);
@@ -33,10 +53,13 @@ public class PlayerHandler : MonoBehaviour
     }
     private void onAnimationDone()
     {
+        Animate.transform.position = Vector3.zero;
         Rigidbody.useGravity = false;
         Rigidbody.velocity = Vector3.zero;
-        transform.position = StartPosition;
-        GameHandler.Instance.removeLife();
+        Cordinate = StartCordinate;
+        if (IsDone) return;
+        if (tryGetPosition(Cordinate, out Vector3 postiion))
+            transform.position = postiion;
     }
     // Update is called once per frame
     void Update()

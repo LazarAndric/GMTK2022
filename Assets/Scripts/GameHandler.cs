@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    public EnemySpawner EnemySpawner;
+    public GridHandler GridHandler;
     public GAMESTATE InitState;
     private GAMESTATE CurrentState;
     public Action<GAMESTATE, GAMESTATE> OnStateChange;
@@ -11,16 +13,22 @@ public class GameHandler : MonoBehaviour
     private Timer Timer;
     public static GameHandler Instance;
     public int NumberOfLife;
+    public int NumberOfEnemies;
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
+
+
+        //Prepare All scenes
+        GridHandler.initGrid();
         Timer = new Timer();
         Timer.initTimer(TimerDuration, false, false);
         Timer.OnTimerDone += onTimerDone;
         Timer.OnTimerUpdate += onTimerUpdate;
         CheckGameOver.OnGameOver += CheckGameOver_OnGameOver;
-        Timer.playTimer();
+        EnemySpawner.spawnEnemies();
+
         Life = NumberOfLife;
     }
 
@@ -48,23 +56,26 @@ public class GameHandler : MonoBehaviour
         //Timer update
     }
     public void onTimerDone() => changeState(GAMESTATE.GameOver);
-
+    public void startGame()
+    {
+        Timer.playTimer();
+        changeState(GAMESTATE.Gameplay);
+    }
     public void changeState(GAMESTATE gameState)
     {
         OnStateChange?.Invoke(CurrentState, gameState);
         CurrentState = gameState;
     }
-    public void stopGamePlay()
+    public void stopGameplay()
     {
 
     }
 }
+[System.Serializable]
 public enum GAMESTATE
 {
     Start,
     Init,
-    UI,
     Gameplay,
-    Pause,
     GameOver
 }
