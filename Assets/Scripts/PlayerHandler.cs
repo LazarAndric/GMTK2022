@@ -11,6 +11,9 @@ public class PlayerHandler : MonoBehaviour
     public float DurationMove;
     public AnimationCurve Curve= new AnimationCurve();
     public bool CanMove=true;
+
+    [SerializeField]
+    float rotationDuration = 0.3f;
     void Start()
     {
         transform.position= Vector3.zero;
@@ -24,6 +27,7 @@ public class PlayerHandler : MonoBehaviour
         {
             if(tryGetPosition(Cordinate + Vector2.left, out Vector3 position))
             {
+                transform.DORotate(Vector3.up * 90f, rotationDuration);
                 Cordinate += Vector2.left;
                 moveTo(position);
             }
@@ -33,6 +37,7 @@ public class PlayerHandler : MonoBehaviour
         {
             if (tryGetPosition(Cordinate + Vector2.right, out Vector3 position))
             {
+                transform.DORotate(-Vector3.up * 90f, rotationDuration);
                 Cordinate += Vector2.right;
                 moveTo(position);
             }
@@ -41,6 +46,7 @@ public class PlayerHandler : MonoBehaviour
         {
             if (tryGetPosition(Cordinate + Vector2.up, out Vector3 position))
             {
+                transform.DORotate(Vector3.up * 180f, rotationDuration);
                 Cordinate += Vector2.up;
                 moveTo(position);
             }
@@ -49,6 +55,7 @@ public class PlayerHandler : MonoBehaviour
         {
             if (tryGetPosition(Cordinate + Vector2.down, out Vector3 position))
             {
+                transform.DORotate(Vector3.up * 0f, rotationDuration);              
                 Cordinate += Vector2.down;
                 moveTo(position);
             }
@@ -60,4 +67,8 @@ public class PlayerHandler : MonoBehaviour
         transform.DOMove(position, DurationMove).SetEase(Curve).OnComplete(()=>CanMove=true);
     }
     public bool tryGetPosition(Vector2 cordinate, out Vector3 position) => GridHandler.Instance.tryGetPosition(cordinate, out position);
+    private void Rotate(float rotation)
+    {
+        
+    }
 }
