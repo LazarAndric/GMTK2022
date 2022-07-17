@@ -120,6 +120,7 @@ public class PlayerHandler : MonoBehaviour
     }
     public void moveTo(Vector3 position)
     {
+        CanMove = false;
         transform.DOMove(position, DurationMove).SetEase(Curve).OnComplete(()=>CanMove=true);
     }
     public bool tryGetPosition(Vector2 cordinate, out Vector3 position) => GridHandler.Instance.tryGetPosition(cordinate, out position);
