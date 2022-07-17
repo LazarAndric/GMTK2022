@@ -11,8 +11,8 @@ public class UIHandler : MonoBehaviour
     public TMP_Text LifeLabel;
 
     public CanvasGroup UiPanel;
-    public CanvasGroup PausePanel;
     public CanvasGroup GameOverPanel;
+    public CanvasGroup WonPanel;
     private void Start()
     {
         GameHandler.Instance.OnStateChange += onStateChange;

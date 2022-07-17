@@ -64,8 +64,9 @@ public class PlayerHandler : MonoBehaviour
         Rigidbody.velocity = Vector3.zero;
         Animate.transform.position = Vector3.zero;
         Cordinate = StartCordinate;
-        GameHandler.Instance.removeLife();
+        GameHandler.Instance.removeLife(); 
         if (IsDone) return;
+        CanMove = true;
         if (tryGetPosition(Cordinate, out Vector3 postiion))
             transform.position = postiion;
         else transform.position = EndPosition;
@@ -115,7 +116,6 @@ public class PlayerHandler : MonoBehaviour
     }
     public void moveTo(Vector3 position)
     {
-        CanMove = false;
         transform.DOMove(position, DurationMove).SetEase(Curve).OnComplete(()=>CanMove=true);
     }
     public bool tryGetPosition(Vector2 cordinate, out Vector3 position) => GridHandler.Instance.tryGetPosition(cordinate, out position);

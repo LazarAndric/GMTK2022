@@ -34,7 +34,6 @@ public class CheckGameOver : MonoBehaviour
         {
             waypointsList.Add(waypoints[i]);
         }
-        waypointNextToFinish = new Waypoint();
         foreach (Waypoint way in waypointsList)
         {
             if (way.Id == idOfEndWaypoint)
