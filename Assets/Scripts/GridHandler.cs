@@ -55,8 +55,8 @@ public class GridHandler : MonoBehaviour
         PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(TimerFunctionality), 0, false);
         PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(-TimerFunctionality), 0, false);
         PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => GameHandler.Instance.addLife(), 0, false);
-        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => Debug.Log("Spawn enemy"), 0, false);
-        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => Debug.Log("Destroy enemy"), 0, false);
+        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => EnemySpawner.SpawnEnemy(), 0, false);
+        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => EnemySpawner.DestroyEnemy(), 0, false);
 
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeNormalFunctionality, normalType));
         PlaneBehaviours.Add(new PlaneBehaviour(emptyNormalFunctionality, normalType));
@@ -83,18 +83,6 @@ public class GridHandler : MonoBehaviour
         Vector3 lastPosition = Vector3.zero;
         int length = NumberOfCells * NumberOfCells;
         var list=RandomUtil.getAvgRandom(length, 0, PlaneBehaviours.Count - 1, Difficulty);
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    GameObject start = Instantiate(SpawnStartPrefab, transform);
-        //    start.transform.position = lastPosition;
-        //    Positions.Add(new Vector2(x, y), start.transform);
-        //    lastPosition = start.transform.position + new Vector3(0, 0, 1 + offsetY);
-        //    y++;
-        //}
-        //y = 0;
-        //x++;
-        //lastPosition += new Vector3(1 + offsetX, 0, 0);
-        //lastPosition = new Vector3(lastPosition.x, lastPosition.y, 0);
         bool startSpawn = true;
         int waypointId = -1;
         for (int i = 0; i < length; i++)
@@ -203,8 +191,4 @@ public class GridHandler : MonoBehaviour
         Destroy(ObjectForDestroy);
     }
 
-    private void CreateStartNodes()
-    {
-       
-    }
 }
