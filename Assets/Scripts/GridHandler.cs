@@ -19,13 +19,14 @@ public class GridHandler : MonoBehaviour
     public Texture DestroyEnemyTexture;
     public float TimerFunctionality;
     public PlaneHandler SpawnPrefab;
-    //public GameObject SpawnStartPrefab;
+    public GameObject SpawnStartPrefab;
     public int NumberOfCells;
     public float offsetX;
     public float offsetY;
     public int RotationAngle;
     public float Duration;
     public float WaitTime;
+    public Vector3 playerStartingPosition;
     [Range(0f, 1f)]
     public float Difficulty;
     private void Awake()
@@ -95,12 +96,13 @@ public class GridHandler : MonoBehaviour
             {
                 if (startSpawn &&  tempI == NumberOfCells)
                 {
-                    //GameObject start = Instantiate(SpawnStartPrefab);
-                    //start.transform.position = lastPosition;
-                    //start.AddComponent<Waypoint>().Occupied = true;
-                    //AddPlaneToGraph(start, waypointId--);                   
-                    //start.AddComponent<EndZone>();
-                    //Positions.Add(new Vector2(x, NumberOfCells), start.transform);
+                    GameObject start = Instantiate(SpawnStartPrefab);
+                    start.transform.position = lastPosition;
+                    playerStartingPosition = start.transform.position;
+                    start.AddComponent<Waypoint>().Occupied = true;
+                    AddPlaneToGraph(start, waypointId--);
+                    start.AddComponent<EndZone>();
+                    Positions.Add(new Vector2(x, NumberOfCells), start.transform);
                     i--;
                     startSpawn = false;
                     continue;
@@ -120,9 +122,9 @@ public class GridHandler : MonoBehaviour
             {
                 if (startSpawn && tempI == 0)
                 {
-                    //GameObject start = Instantiate(SpawnStartPrefab);
-                    //start.transform.position = new Vector3(lastPosition.x, lastPosition.y, lastPosition.z - 1);
-                    //Positions.Add(new Vector2(x, -1), start.transform);
+                    GameObject start = Instantiate(SpawnStartPrefab);
+                    start.transform.position = new Vector3(lastPosition.x, lastPosition.y, lastPosition.z - 1);
+                    Positions.Add(new Vector2(x, -1), start.transform);
                     startSpawn = false;
                     tempI = 0;
                     i--;
