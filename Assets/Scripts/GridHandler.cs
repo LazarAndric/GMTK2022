@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class GridHandler : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class GridHandler : MonoBehaviour
     }
     public void initializePlaneBehaviour()
     {
+        
+
         //PlaneType initialization
         PlaneType normalType = new PlaneType(Type.Normal, null);
         PlaneType surpriseType = new PlaneType(Type.Surprise, SurpriseTexture);
@@ -134,6 +137,8 @@ public class GridHandler : MonoBehaviour
         if (player != null)
         {
             print("Game over");
+            player.transform.DOKill();
+            player.GetComponent<PlayerHandler>().CanMove = false; 
             player.GetComponent<Rigidbody>().useGravity = true;           
             GameHandler.Instance.removeLife();
         }        
@@ -142,9 +147,12 @@ public class GridHandler : MonoBehaviour
             //remove node from graph
             Waypoint waypoint = plane.Cube.GetComponentInParent<Waypoint>();
             GraphBuilder.Graph.RemoveNode(waypoint);
-            
-            //checkGameOver.GameOver(GraphBuilder.Graph);
+            //remove transform from dictanory
+            var myKey = Positions.FirstOrDefault(x => x.Value == waypoint.transform).Key;
+            Positions.Remove(myKey);  
+
+            CheckGameOver.GameOver(GraphBuilder.Graph, waypoint);
         }
-        Destroy(plane.Cube);
+        Destroy(plane.gameObject);
     }
 }
