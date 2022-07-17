@@ -15,7 +15,6 @@ public class GridHandler : MonoBehaviour
     public Texture AddTimeTexture;
     public Texture RemoveTimeTexture;
     public Texture AddLifeTexture;
-    public Texture RemoveLifeTexture;
     public Texture SpawnEnemyTexture;
     public Texture DestroyEnemyTexture;
     public float TimerFunctionality;
@@ -56,9 +55,8 @@ public class GridHandler : MonoBehaviour
         PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(TimerFunctionality), 0, false);
         PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(-TimerFunctionality), 0, false);
         PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => GameHandler.Instance.addLife(), 0, false);
-        PlaneFunctionality removeLifeFunctionality = new PlaneFunctionality(Functionality.RemoveLife, RemoveLifeTexture, (PlaneHandler plane) => GameHandler.Instance.removeLife(), 0, false);
-        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, AddLifeTexture, (PlaneHandler plane) => Debug.Log("Spawn enemy"), 0, false);
-        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, RemoveLifeTexture, (PlaneHandler plane) => Debug.Log("Destroy enemy"), 0, false);
+        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => Debug.Log("Spawn enemy"), 0, false);
+        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => Debug.Log("Destroy enemy"), 0, false);
 
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeNormalFunctionality, normalType));
         PlaneBehaviours.Add(new PlaneBehaviour(emptyNormalFunctionality, normalType));
@@ -73,7 +71,6 @@ public class GridHandler : MonoBehaviour
         PlaneBehaviours.Add(new PlaneBehaviour(addTimeFunctionality, surpriseType));
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeFunctionality, surpriseType));
         PlaneBehaviours.Add(new PlaneBehaviour(addLifeFunctionality, surpriseType));
-        PlaneBehaviours.Add(new PlaneBehaviour(removeLifeFunctionality, surpriseType));
         PlaneBehaviours.Add(new PlaneBehaviour(spawnEnemyFunctionality, surpriseType));
         PlaneBehaviours.Add(new PlaneBehaviour(destroyEnemyFunctionality, surpriseType));
 

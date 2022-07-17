@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: preset_texture
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: c7793db355f0fd9468b854e3370361b4,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: TagForCollision
+    value: Player
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: PlaneBehaviours.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SurpriseTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: e0012b9744fc69e40807dc5287ad4ce5, type: 3}
+  - target: {fileID: 0}
+    propertyPath: Explosion
+    value: 
+    objectReference: {fileID: 2800000, guid: aa45996e3de6aac478e3e153245402af, type: 3}
+  - target: {fileID: 0}
+    propertyPath: MoveTo
+    value: 
+    objectReference: {fileID: 2800000, guid: 243ce0eeb8b0e1a45a83b00eeea5bd18, type: 3}
+  - target: {fileID: 0}
+    propertyPath: AddTimeTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 16373e62c0d87654cb8eab1f71e154f1, type: 3}
+  - target: {fileID: 0}
+    propertyPath: RemoveTimeTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 8c9fb8155eda5b44eae3f134270cd039, type: 3}
+  - target: {fileID: 0}
+    propertyPath: AddLifeTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 39b4a77fd5d922a4283ab11c03f279ea, type: 3}
+  - target: {fileID: 0}
+    propertyPath: SpawnEnemyTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 4752cd66647fbee44aad8e36eefda901, type: 3}
+  - target: {fileID: 0}
+    propertyPath: DestroyEnemyTexture
+    value: 
+    objectReference: {fileID: 2800000, guid: 08c85070f7a12e74aba9c21bf2af00f7, type: 3}
+  - target: {fileID: 0}
+    propertyPath: TimerFunctionality
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: SpawnPrefab
+    value: 
+    objectReference: {fileID: 5180937299108964870, guid: 9054273ace1ed154d9672a52603a0f0f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: NumberOfCells
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: offsetX
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: offsetY
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: RotationAngle
+    value: -90
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Duration
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: WaitTime
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Difficulty
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
