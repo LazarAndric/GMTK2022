@@ -20,6 +20,7 @@ public class PlaneHandler : MonoBehaviour
     int iteration;
     bool IsRotationDone;
     public GameObject CurrentObject;
+    public Vector2 Cordinate;
     public void stayInBound()
     {
         if (index >= Faces.Count)
@@ -31,8 +32,9 @@ public class PlaneHandler : MonoBehaviour
             index = Faces.Count - 1;
         }    
     }
-    public void initializePlane(PlaneBehaviour planeBehaviour, int rotationAngle, float duration, float waitTime, string tagForCollision)
+    public void initializePlane(PlaneBehaviour planeBehaviour, int rotationAngle, float duration, float waitTime, string tagForCollision, Vector2 cordinate)
     {
+        Cordinate = cordinate;
         Timer = new Timer();
         Timer.OnTimerDone += onTimerDone;
         WaitTime = waitTime;

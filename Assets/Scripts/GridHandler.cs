@@ -55,7 +55,13 @@ public class GridHandler : MonoBehaviour
         PlaneFunctionality timer2Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 2, true);
         PlaneFunctionality timer3Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 3, true);
         PlaneFunctionality deathFunctionality = new PlaneFunctionality(Functionality.Death, Explosion, (PlaneHandler plane) => Explode(plane), 0, true);
-        PlaneFunctionality moveToFunctionality = new PlaneFunctionality(Functionality.MoveTo, MoveTo, (PlaneHandler plane) => Debug.Log("Move to"), 0, false);
+        PlaneFunctionality moveToFunctionality = new PlaneFunctionality(Functionality.MoveTo, MoveTo, (PlaneHandler plane) => { 
+            if (tryGetPosition(plane.Cordinate - Vector2.right * 2, out Vector3 position))
+            {
+                plane.CurrentObject.GetComponent<PlayerHandler>().Cordinate = plane.Cordinate - Vector2.right * 2;
+                transform.DOMove(position, 0.5f);
+            } 
+        }, 0, false);
         PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(TimerFunctionality), 0, false);
         PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(-TimerFunctionality), 0, false);
         PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => GameHandler.Instance.addLife(), 0, false);
@@ -133,7 +139,7 @@ public class GridHandler : MonoBehaviour
             }
           
             PlaneHandler cube = Instantiate(SpawnPrefab, transform);
-            cube.initializePlane(PlaneBehaviours[list[i]], RotationAngle, Duration, WaitTime, TagForCollision);
+            cube.initializePlane(PlaneBehaviours[list[i]], RotationAngle, Duration, WaitTime, TagForCollision, new Vector2(x, y));
             cube.transform.position = lastPosition;
             AddPlaneToGraph(cube.gameObject, i);
             Positions.Add(new Vector2(x, y), cube.transform);

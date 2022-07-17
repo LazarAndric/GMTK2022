@@ -47,7 +47,7 @@ public class PlayerHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("End"))
         {
-            print("You won");
+            GameHandler.Instance.changeState(GAMESTATE.Won);
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
@@ -58,7 +58,6 @@ public class PlayerHandler : MonoBehaviour
 
         if (other.gameObject.CompareTag("Fall"))
         {
-            print("you fell");
             //GameHandler.Instance.removeLife();
             onAnimationDone();
         }

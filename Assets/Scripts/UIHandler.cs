@@ -25,6 +25,8 @@ public class UIHandler : MonoBehaviour
     {
         if (arg2 == GAMESTATE.GameOver)
             showPanel(GameOverPanel);
+        if (arg2 == GAMESTATE.Won)
+            showPanel(WonPanel);
     }
 
     public void showPanel(CanvasGroup panel)=> panel.DOFade(1, speed);
