@@ -28,6 +28,7 @@ public class GameHandler : MonoBehaviour
         Timer.OnTimerUpdate += onTimerUpdate;
         CheckGameOver.OnGameOver += CheckGameOver_OnGameOver;
         EnemySpawner.spawnEnemies();
+        AudioPlayer.Instance.playClip(ClipName.Background, true);
 
         Life = NumberOfLife;
     }

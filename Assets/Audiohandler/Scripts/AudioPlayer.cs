@@ -5,7 +5,12 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     public List<AudioDataModel> sounds= new List<AudioDataModel>();
-    private void Awake() => filtrateDuplicate();
+    public static AudioPlayer Instance;
+    private void Awake() {
+        if (Instance == null)
+            Instance = this;
+        filtrateDuplicate();
+    }
     private void Start()
     {
         foreach (var sound in sounds)
@@ -20,6 +25,11 @@ public class AudioPlayer : MonoBehaviour
     public void playClip(ClipName clip)
     {
         getAudioSource(clip).Play();
+    }
+    public void playClip(ClipName clip, bool isLoop)
+    {
+        getAudioSource(clip).Play();
+        getAudioSource(clip).loop = isLoop;
     }
     public void generateSource(ClipName clipName, Transform parent)
     {

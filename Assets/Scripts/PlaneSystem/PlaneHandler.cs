@@ -134,11 +134,13 @@ public class PlaneHandler : MonoBehaviour
     }
     public void rotateCube()
     {
+        AudioPlayer.Instance.playClip(ClipName.BoxRotate);
         Cube.transform.DOBlendableRotateBy(Vector3.right * RoatationAngle, Duration)
             .SetEase(Ease.OutExpo);
     }
     public void rotateCubeWithCallback(Action onDone)
     {
+        AudioPlayer.Instance.playClip(ClipName.BoxRotate);
         Cube.transform.DOBlendableRotateBy(Vector3.right * RoatationAngle, Duration)
             .SetEase(Ease.OutExpo)
             .OnComplete(() => { onDone?.Invoke(); });

@@ -41,16 +41,21 @@ public class GridHandler : MonoBehaviour
     }
     public void initializePlaneBehaviour()
     {
-        
+
         //PlaneType initialization
         PlaneType normalType = new PlaneType(Type.Normal, null);
         PlaneType surpriseType = new PlaneType(Type.Surprise, SurpriseTexture);
 
         //PlaneFunctionality initialization
-        PlaneFunctionality addTimeNormalFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(TimerFunctionality), 2, false);
+        PlaneFunctionality addTimeNormalFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => {
+            AudioPlayer.Instance.playClip(ClipName.GoodSound);
+            GameHandler.Instance.changeTimer(TimerFunctionality);
+        }, 2, false);
         PlaneFunctionality emptyFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => Debug.Log("Its empty"), 0, false);
-        PlaneFunctionality emptyNormalFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => Debug.Log("Its empty"), 3, false);
-        PlaneFunctionality removeTimeNormalFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(-TimerFunctionality), 3, false);
+        PlaneFunctionality emptyNormalFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => {
+         Debug.Log("Its empty");
+        }, 3, false);
+        PlaneFunctionality removeTimeNormalFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => { AudioPlayer.Instance.playClip(ClipName.BadSound); GameHandler.Instance.changeTimer(-TimerFunctionality); }, 3, false);
         PlaneFunctionality timer1Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 1, true) ;
         PlaneFunctionality timer2Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 2, true);
         PlaneFunctionality timer3Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 3, true);
@@ -62,11 +67,11 @@ public class GridHandler : MonoBehaviour
                 transform.DOMove(position, 0.5f);
             } 
         }, 0, false);
-        PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(TimerFunctionality), 0, false);
-        PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(-TimerFunctionality), 0, false);
-        PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => GameHandler.Instance.addLife(), 0, false);
-        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => EnemySpawner.SpawnEnemy(), 0, false);
-        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => EnemySpawner.DestroyEnemy(), 0, false);
+        PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => { AudioPlayer.Instance.playClip(ClipName.GoodSound); GameHandler.Instance.changeTimer(TimerFunctionality); }, 0, false);
+        PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => { AudioPlayer.Instance.playClip(ClipName.BadSound); GameHandler.Instance.changeTimer(-TimerFunctionality); }, 0, false);
+        PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => { AudioPlayer.Instance.playClip(ClipName.GoodSound); GameHandler.Instance.addLife(); }, 0, false);
+        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => { AudioPlayer.Instance.playClip(ClipName.BadSound); EnemySpawner.SpawnEnemy(); }, 0, false);
+        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => { AudioPlayer.Instance.playClip(ClipName.GoodSound); EnemySpawner.DestroyEnemy(); }, 0, false);
 
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeNormalFunctionality, normalType));
         PlaneBehaviours.Add(new PlaneBehaviour(emptyNormalFunctionality, normalType));
@@ -175,7 +180,7 @@ public class GridHandler : MonoBehaviour
     }
     public GameObject ObjectForDestroy;
     private void Explode(PlaneHandler plane)
-    {      
+    {
         GameObject player = plane.CurrentObject;
         if (player != null)
         {
@@ -190,8 +195,10 @@ public class GridHandler : MonoBehaviour
         GraphBuilder.Graph.RemoveNode(waypoint);
         //remove transform from dictanory
         var myKey = Positions.FirstOrDefault(x => x.Value == waypoint.transform).Key;
-        Positions.Remove(myKey);  
+        Positions.Remove(myKey);
 
+
+        AudioPlayer.Instance.playClip(ClipName.BoxExplosion);
         CheckGameOver.GameOver(GraphBuilder.Graph, waypoint);
         ObjectForDestroy = plane.gameObject;
         plane.Platofrm.startAnimation(AnimationType.Death, () => plane.Platofrm.gameObject.SetActive(false));
@@ -200,6 +207,7 @@ public class GridHandler : MonoBehaviour
     }
     public void onDone()
     {
+        AudioPlayer.Instance.stopClip(ClipName.BoxExplosion);
         Destroy(ObjectForDestroy);
     }
 

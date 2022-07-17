@@ -42,6 +42,7 @@ public class PlayerHandler : MonoBehaviour
         Cordinate = StartCordinate;
         if (tryGetPosition(Cordinate, out Vector3 postiion))
             transform.position = postiion;
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -51,6 +52,7 @@ public class PlayerHandler : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
+            AudioPlayer.Instance.playClip(ClipName.PlayerDeath);
             Animate.startAnimation(AnimationType.Death, onAnimationDone);
             //animation
             //Destroy(other.gameObject);
@@ -58,6 +60,7 @@ public class PlayerHandler : MonoBehaviour
 
         if (other.gameObject.CompareTag("Fall"))
         {
+            AudioPlayer.Instance.stopClip(ClipName.PlayerDeath);
             //GameHandler.Instance.removeLife();
             onAnimationDone();
         }
