@@ -331,6 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636090392836969790, guid: 37b8add048f61c7478b141c9096618ba,
         type: 3}
+      propertyPath: EndPosition.z
+      value: -33.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636090392836969790, guid: 37b8add048f61c7478b141c9096618ba,
+        type: 3}
       propertyPath: Curve.m_Curve.Array.data[0].inSlope
       value: 2.4132538
       objectReference: {fileID: 0}
@@ -359,7 +364,8 @@ PrefabInstance:
       propertyPath: Curve.m_Curve.Array.data[0].outWeight
       value: 0.022478068
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5238640037029227007, guid: 37b8add048f61c7478b141c9096618ba, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37b8add048f61c7478b141c9096618ba, type: 3}
 --- !u!1 &410087039
 GameObject:
@@ -702,6 +708,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 518743417}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &520243240
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,12 +838,15 @@ MonoBehaviour:
   TimerFunctionality: 1
   SpawnPrefab: {fileID: 5180937299108964870, guid: 9054273ace1ed154d9672a52603a0f0f,
     type: 3}
+  SpawnStartPrefab: {fileID: 5290864345768077490, guid: 1c7ba982cb71c0146a4e3f1ba9b11dfe,
+    type: 3}
   NumberOfCells: 6
   offsetX: 0.1
   offsetY: 0.1
   RotationAngle: -90
   Duration: 0.5
   WaitTime: 0.2
+  playerStartingPosition: {x: 0, y: 0, z: 0}
   Difficulty: 0
   ObjectForDestroy: {fileID: 0}
 --- !u!4 &525819346
