@@ -5,35 +5,56 @@ using UnityEngine;
 
 public class CheckGameOver : MonoBehaviour
 {
+
     public static event Action OnGameOver;
+
     [SerializeField]
     int idOfEndNode = 33;
+    [HideInInspector]
+    public static List<Waypoint> waypointsList;
 
-    Waypoint lastWaypoint;
-    Waypoint[] waypoints;
+    static int idOfEndWaypoint;
+    static Waypoint lastWaypoint;
+    public Waypoint[] waypoints;
 
+    static Waypoint waypointNextToFinish;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Plane"))
         {
             lastWaypoint = other.GetComponentInParent<Waypoint>();
-            GameOver(GraphBuilder.Graph);
         }
     }
     private void Start()
     {
+        waypointsList = new List<Waypoint>();
+        idOfEndWaypoint = idOfEndNode;
         waypoints = GameObject.FindObjectsOfType<Waypoint>();
-
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            waypointsList.Add(waypoints[i]);
+        }
+        waypointNextToFinish = new Waypoint();
+        foreach (Waypoint way in waypointsList)
+        {
+            if (way.Id == idOfEndWaypoint)
+            {
+                waypointNextToFinish = way;
+                break;
+            }
+        }
     }
 
-    public void GameOver(Graph<Waypoint> graph)
+    public static void GameOver(Graph<Waypoint> graph, Waypoint w)
     {
+        waypointsList.Remove(w);
         SortedLinkedList<SearchNode<Waypoint>> searchList = new SortedLinkedList<SearchNode<Waypoint>>();
         
         Dictionary<GraphNode<Waypoint>, SearchNode<Waypoint>> dictonarySearch = new Dictionary<GraphNode<Waypoint>, SearchNode<Waypoint>>();
         GraphNode<Waypoint> startNode = graph.Find(lastWaypoint);
-        GraphNode<Waypoint> endNode = graph.Find(waypoints[waypoints.Length - idOfEndNode - 1]);
+
+        GraphNode <Waypoint> endNode = graph.Find(waypointNextToFinish);
         // if there is 1 end node and it is destroyed it is game over
         if(endNode == null || startNode == null)
         {
