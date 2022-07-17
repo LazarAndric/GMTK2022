@@ -19,6 +19,7 @@ public class GridHandler : MonoBehaviour
     public Texture DestroyEnemyTexture;
     public float TimerFunctionality;
     public PlaneHandler SpawnPrefab;
+    public GameObject SpawnStartPrefab;
     public int NumberOfCells;
     public float offsetX;
     public float offsetY;
@@ -54,8 +55,8 @@ public class GridHandler : MonoBehaviour
         PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(TimerFunctionality), 0, false);
         PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => GameHandler.Instance.changeTimer(-TimerFunctionality), 0, false);
         PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => GameHandler.Instance.addLife(), 0, false);
-        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => Debug.Log("Spawn enemy"), 0, false);
-        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => Debug.Log("Destroy enemy"), 0, false);
+        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, SpawnEnemyTexture, (PlaneHandler plane) => EnemySpawner.SpawnEnemy(), 0, false);
+        PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, DestroyEnemyTexture, (PlaneHandler plane) => EnemySpawner.DestroyEnemy(), 0, false);
 
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeNormalFunctionality, normalType));
         PlaneBehaviours.Add(new PlaneBehaviour(emptyNormalFunctionality, normalType));
@@ -82,8 +83,26 @@ public class GridHandler : MonoBehaviour
         Vector3 lastPosition = Vector3.zero;
         int length = NumberOfCells * NumberOfCells;
         var list=RandomUtil.getAvgRandom(length, 0, PlaneBehaviours.Count - 1, Difficulty);
+        bool startSpawn = true;
+        int waypointId = -1;
         for (int i = 0; i < length; i++)
         {
+            //end platform
+            if ((i == NumberOfCells || i == NumberOfCells * 2))
+            {
+                if (startSpawn &&  tempI == NumberOfCells)
+                {
+                    GameObject start = Instantiate(SpawnStartPrefab);
+                    start.transform.position = lastPosition;
+                    start.AddComponent<Waypoint>().Occupied = true;
+                    AddPlaneToGraph(start, waypointId--);                   
+                    start.AddComponent<EndZone>();
+                    Positions.Add(new Vector2(x, NumberOfCells), start.transform);
+                    i--;
+                    startSpawn = false;
+                    continue;
+                }
+            }
             if (tempI >= NumberOfCells)
             {
                 tempI = 0;
@@ -91,7 +110,23 @@ public class GridHandler : MonoBehaviour
                 y = 0;
                 lastPosition += new Vector3(1 + offsetX, 0, 0);
                 lastPosition = new Vector3(lastPosition.x, lastPosition.y, 0);
+                
             }
+            //start platform
+            if ((i == length - NumberOfCells || i == length - 2*NumberOfCells))
+            {
+                if (startSpawn && tempI == 0)
+                {
+                    GameObject start = Instantiate(SpawnStartPrefab);
+                    start.transform.position = new Vector3(lastPosition.x, lastPosition.y, lastPosition.z - 1);
+                    Positions.Add(new Vector2(x, -1), start.transform);
+                    startSpawn = false;
+                    tempI = 0;
+                    i--;
+                    continue;
+                }
+            }
+          
             PlaneHandler cube = Instantiate(SpawnPrefab, transform);
             cube.initializePlane(PlaneBehaviours[list[i]], RotationAngle, Duration, WaitTime, TagForCollision);
             cube.transform.position = lastPosition;
@@ -100,6 +135,7 @@ public class GridHandler : MonoBehaviour
             lastPosition = cube.transform.position + new Vector3(0, 0, 1 + offsetY);
             tempI++;
             y++;
+            startSpawn = true;
         }
         GraphBuilder.CreateGraph(waypoitns, offsetX, offsetY);
 
@@ -154,4 +190,5 @@ public class GridHandler : MonoBehaviour
     {
         Destroy(ObjectForDestroy);
     }
+
 }
