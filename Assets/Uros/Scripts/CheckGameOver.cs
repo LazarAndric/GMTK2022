@@ -46,12 +46,12 @@ public class CheckGameOver : MonoBehaviour
 
     public static void GameOver(Graph<Waypoint> graph, Waypoint w)
     {
-        GraphNode<Waypoint> startNode = graph.Find(lastWaypoint);
+        
         waypointsList.Remove(w);
         SortedLinkedList<SearchNode<Waypoint>> searchList = new SortedLinkedList<SearchNode<Waypoint>>();
         
         Dictionary<GraphNode<Waypoint>, SearchNode<Waypoint>> dictonarySearch = new Dictionary<GraphNode<Waypoint>, SearchNode<Waypoint>>();
-        
+        GraphNode<Waypoint> startNode = graph.Find(lastWaypoint);
 
         GraphNode <Waypoint> endNode = graph.Find(waypointNextToFinish);
         // if there is 1 end node and it is destroyed it is game over
