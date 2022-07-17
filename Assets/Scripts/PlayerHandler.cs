@@ -45,6 +45,10 @@ public class PlayerHandler : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("End"))
+        {
+            print("You won");
+        }
         if (other.gameObject.CompareTag("Enemy"))
         {
             Animate.startAnimation(AnimationType.Death, onAnimationDone);
@@ -54,6 +58,7 @@ public class PlayerHandler : MonoBehaviour
 
         if (other.gameObject.CompareTag("Fall"))
         {
+            print("you fell");
             //GameHandler.Instance.removeLife();
             onAnimationDone();
         }
