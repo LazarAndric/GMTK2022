@@ -131,6 +131,8 @@ public class GridHandler : MonoBehaviour
         if (player != null)
         {
             print("Game over");
+            player.transform.DOKill();
+            player.GetComponent<PlayerHandler>().CanMove = false; 
             player.GetComponent<Rigidbody>().useGravity = true;           
             GameHandler.Instance.removeLife();
         }        
