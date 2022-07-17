@@ -31,8 +31,14 @@ public class GameHandler : MonoBehaviour
 
         Life = NumberOfLife;
     }
+    public void restartLevel()
+    {
 
-    private void CheckGameOver_OnGameOver() => changeState(GAMESTATE.GameOver);
+    }
+    private void CheckGameOver_OnGameOver()
+    {
+        changeState(GAMESTATE.GameOver);
+    }
     int lastLife;
     int Life;
     private void Update()

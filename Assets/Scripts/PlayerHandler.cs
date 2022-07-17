@@ -29,7 +29,6 @@ public class PlayerHandler : MonoBehaviour
         }
         if(GAMESTATE.GameOver == arg2)
         {
-            transform.position = EndPosition;
             IsDone = true;
         }
     }
@@ -45,7 +44,6 @@ public class PlayerHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            GameHandler.Instance.removeLife();
             Animate.startAnimation(AnimationType.Death, onAnimationDone);
             //animation
             //Destroy(other.gameObject);
@@ -53,13 +51,15 @@ public class PlayerHandler : MonoBehaviour
     }
     private void onAnimationDone()
     {
-        Animate.transform.position = Vector3.zero;
         Rigidbody.useGravity = false;
         Rigidbody.velocity = Vector3.zero;
+        Animate.transform.position = Vector3.zero;
         Cordinate = StartCordinate;
+        GameHandler.Instance.removeLife();
         if (IsDone) return;
         if (tryGetPosition(Cordinate, out Vector3 postiion))
             transform.position = postiion;
+        else transform.position = EndPosition;
     }
     // Update is called once per frame
     void Update()
