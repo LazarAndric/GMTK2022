@@ -1,0 +1,7 @@
+1. Go to AudioHandler -> ClipName and add all names of clip you want to be played.
+(Don't need to be same as clip name)
+2. Be sure that names and clips are in same order
+(first clip in project = first name in enum)
+3. Now put AudioPlayer on all game objects where you want to play sound.
+4. On player add to list all enum which you want to play there need to be added there.
+(Can't add duplicate clip name on same AudioPlayer.

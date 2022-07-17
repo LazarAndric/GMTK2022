@@ -9,8 +9,8 @@ public class KillPlayer : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //animation
-            Destroy(other.gameObject);
-            GameHandler.Instance.removeLife();
+            //Destroy(other.gameObject);
+            //GameHandler.Instance.removeLife();
         }
     }
 }

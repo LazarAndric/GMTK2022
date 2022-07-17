@@ -6,19 +6,38 @@ using DG.Tweening;
 
 public class PlayerHandler : MonoBehaviour
 {
+    public Vector3 StartPosition;
     // Start is called before the first frame update
+    public AnimationHandler Animate;
     public Vector2 Cordinate;
     public float DurationMove;
     public AnimationCurve Curve= new AnimationCurve();
     public bool CanMove=true;
+    public Rigidbody Rigidbody;
 
     [SerializeField]
     float rotationDuration = 0.3f;
     void Start()
     {
         transform.position= Vector3.zero;
+        StartPosition= transform.position;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Animate.startAnimation(AnimationType.Death, onAnimationDone);
+            //animation
+            //Destroy(other.gameObject);
+        }
+    }
+    private void onAnimationDone()
+    {
+        Rigidbody.useGravity = false;
+        Rigidbody.velocity = Vector3.zero;
+        transform.position = StartPosition;
+        GameHandler.Instance.removeLife();
+    }
     // Update is called once per frame
     void Update()
     {
