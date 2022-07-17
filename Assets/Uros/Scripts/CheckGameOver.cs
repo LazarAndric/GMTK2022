@@ -27,13 +27,20 @@ public class CheckGameOver : MonoBehaviour
 
     }
 
-    public bool GameOver(Graph<Waypoint> graph)
+    public void GameOver(Graph<Waypoint> graph)
     {
         SortedLinkedList<SearchNode<Waypoint>> searchList = new SortedLinkedList<SearchNode<Waypoint>>();
         
         Dictionary<GraphNode<Waypoint>, SearchNode<Waypoint>> dictonarySearch = new Dictionary<GraphNode<Waypoint>, SearchNode<Waypoint>>();
         GraphNode<Waypoint> startNode = graph.Find(lastWaypoint);
         GraphNode<Waypoint> endNode = graph.Find(waypoints[waypoints.Length - idOfEndNode - 1]);
+        // if there is 1 end node and it is destroyed it is game over
+        if(endNode == null || startNode == null)
+        {
+            OnGameOver?.Invoke();
+            print("Game over, path can't be found");
+            return;
+        }
 
         foreach (GraphNode<Waypoint> waypoint in graph.Nodes)
         {
@@ -56,11 +63,12 @@ public class CheckGameOver : MonoBehaviour
             dictonarySearch.Remove(currentGraphNode);
             if (currentGraphNode.Value == endNode.Value)
             {
+                // if distance is anything above 36 (number of ndoes), path doesn't exists
                 if (searchNode.Distance > 100)
                 {
                     OnGameOver?.Invoke();
-                    print("Game over");
-                    return true;
+                    print("Game over, path can't be found");
+                    return;
                 }
                
             }
@@ -84,6 +92,6 @@ public class CheckGameOver : MonoBehaviour
             }
 
         }
-        return false;
+       
     }
 }

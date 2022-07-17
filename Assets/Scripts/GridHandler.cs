@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GridHandler : MonoBehaviour
 {
@@ -29,21 +30,22 @@ public class GridHandler : MonoBehaviour
         PlaneType normalType = new PlaneType(Type.Normal, null);
         PlaneType surpriseType = new PlaneType(Type.Surprise, SurpriseTexture);
 
+
         //PlaneFunctionality initialization
         PlaneFunctionality addTimeNormalFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => Debug.Log("Add time"), 2, false);
         PlaneFunctionality emptyFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => Debug.Log("Its empty"), 0, false);
         PlaneFunctionality emptyNormalFunctionality = new PlaneFunctionality(Functionality.Empty, null, (PlaneHandler plane) => Debug.Log("Its empty"), 3, false);
         PlaneFunctionality removeTimeNormalFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => Debug.Log("Remove time"), 3, false);
-        PlaneFunctionality timer1Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 1, true);
-        PlaneFunctionality timer2Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 2, true);
-        PlaneFunctionality timer3Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 3, true);
-        PlaneFunctionality deathFunctionality = new PlaneFunctionality(Functionality.Death, Explosion, (PlaneHandler plane) => Debug.Log("Exploded"), 0, true);
+        PlaneFunctionality timer1Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 1, true) ;
+        PlaneFunctionality timer2Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 2, true);
+        PlaneFunctionality timer3Functionality = new PlaneFunctionality(Functionality.TimerToDeath, Explosion, (PlaneHandler plane) => Explode(plane), 3, true);
+        PlaneFunctionality deathFunctionality = new PlaneFunctionality(Functionality.Death, Explosion, (PlaneHandler plane) => Explode(plane), 0, true);
         PlaneFunctionality moveToFunctionality = new PlaneFunctionality(Functionality.MoveTo, MoveTo, (PlaneHandler plane) => Debug.Log("Move to"), 0, false);
         PlaneFunctionality addTimeFunctionality = new PlaneFunctionality(Functionality.AddTime, AddTimeTexture, (PlaneHandler plane) => Debug.Log("Add time"), 0, false);
         PlaneFunctionality removeTimeFunctionality = new PlaneFunctionality(Functionality.RemoveTime, RemoveTimeTexture, (PlaneHandler plane) => Debug.Log("Remove time"), 0, false);
         PlaneFunctionality addLifeFunctionality = new PlaneFunctionality(Functionality.AddLife, AddLifeTexture, (PlaneHandler plane) => Debug.Log("Add life"), 0, false);
         PlaneFunctionality removeLifeFunctionality = new PlaneFunctionality(Functionality.RemoveLife, RemoveLifeTexture, (PlaneHandler plane) => Debug.Log("Remove life"), 0, false);
-        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, AddLifeTexture, (PlaneHandler plane) => Debug.Log("Spawn enemy"), 0, false);
+        PlaneFunctionality spawnEnemyFunctionality = new PlaneFunctionality(Functionality.SpawnEnemy, AddLifeTexture, (PlaneHandler plane) => EnemySpawner.SpawnEnemy(), 0, false);
         PlaneFunctionality destroyEnemyFunctionality = new PlaneFunctionality(Functionality.DestroyEnemy, RemoveLifeTexture, (PlaneHandler plane) => Debug.Log("Destroy enemy"), 0, false);
 
         PlaneBehaviours.Add(new PlaneBehaviour(removeTimeNormalFunctionality, normalType));
@@ -121,5 +123,25 @@ public class GridHandler : MonoBehaviour
         Waypoint waypoint = cube.AddComponent<Waypoint>();
         waypoint.Id = id;
         waypoitns.Add(waypoint);
+    }
+
+    private void Explode(PlaneHandler plane)
+    {      
+        GameObject? player = plane.CurrentObject;
+        if (player != null)
+        {
+            print("Game over");
+            player.GetComponent<Rigidbody>().useGravity = true;           
+            GameHandler.Instance.removeLife();
+        }        
+        else
+        {
+            //remove node from graph
+            Waypoint waypoint = plane.Cube.GetComponentInParent<Waypoint>();
+            GraphBuilder.Graph.RemoveNode(waypoint);
+            
+            //checkGameOver.GameOver(GraphBuilder.Graph);
+        }
+        Destroy(plane.Cube);
     }
 }
