@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     static GameObject plane;
     static List<GameObject> enemies = new List<GameObject>();
     static int numberOfCells;
-    private void Start()
+    private void Awake()
     {
         staticPrefab = enemyPrefab;
         plane =   GameObject.FindGameObjectWithTag("Plane");
