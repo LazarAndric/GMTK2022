@@ -213,6 +213,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49685069}
   m_CullTransparentMesh: 1
+--- !u!1001 &81321382
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257722314691740815, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308445932361012678, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: sounds.Array.data[0].Parent
+      value: 
+      objectReference: {fileID: 527274266}
+    - target: {fileID: 5215272413789147455, guid: ae3882eaf8de19a419ff2f94fe601a28,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ae3882eaf8de19a419ff2f94fe601a28, type: 3}
 --- !u!1001 &122843703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -341,7 +415,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 70.41, y: 52.63}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 150
+  m_FocalLength: 98.208916
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -350,7 +424,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 19.90067
+  field of view: 30.000002
   orthographic: 0
   orthographic size: 4
   m_Depth: -1
@@ -376,8 +450,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.25805545, y: -0.35478568, z: 0.102552116, w: 0.8927584}
-  m_LocalPosition: {x: 15.09, y: 10.41, z: -10.24}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 15.09, y: 10.77, z: -10.24}
+  m_LocalScale: {x: 1, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -594,7 +668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: THANKS FOR PLAYING!
+  m_text: ' Better luck next time!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f0e77622f2ac4d409ff0788143484bf, type: 2}
   m_sharedMaterial: {fileID: 6843702216614512576, guid: 5f0e77622f2ac4d409ff0788143484bf,
@@ -1152,7 +1226,7 @@ MonoBehaviour:
   Duration: 0.5
   WaitTime: 0.2
   playerStartingPosition: {x: 0, y: 0, z: 0}
-  Difficulty: 0.566
+  Difficulty: 0.356
   ObjectForDestroy: {fileID: 0}
 --- !u!4 &525819346
 Transform:
@@ -1169,6 +1243,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &527274266 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3308445932361012677, guid: ae3882eaf8de19a419ff2f94fe601a28,
+    type: 3}
+  m_PrefabInstance: {fileID: 81321382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &702904246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,8 +1705,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625395198}
   m_LocalRotation: {x: 0.26992866, y: -0.35325348, z: 0.10722287, w: 0.88929963}
-  m_LocalPosition: {x: -3.67, y: -6.09, z: 7.36}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.2, y: -6.09, z: 7.36}
+  m_LocalScale: {x: 1.6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1690,7 +1770,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: YOU WON!
+  m_text: ' Phew... You made it!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f0e77622f2ac4d409ff0788143484bf, type: 2}
   m_sharedMaterial: {fileID: 6843702216614512576, guid: 5f0e77622f2ac4d409ff0788143484bf,
@@ -2098,7 +2178,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: press anywhere to play
+  m_text: " Click to begin!\n\n\nKeep Rolling created by  Signal Alert Team \r\n\r\n
+    Uro\u0161 Spasenovi\u0107\r\n Lazar Andri\u0107\r\n Jovan \u0160arenac"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f0e77622f2ac4d409ff0788143484bf, type: 2}
   m_sharedMaterial: {fileID: 6843702216614512576, guid: 5f0e77622f2ac4d409ff0788143484bf,
