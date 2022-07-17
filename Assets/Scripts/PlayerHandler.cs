@@ -18,6 +18,7 @@ public class PlayerHandler : MonoBehaviour
     private void Start()
     {
         GameHandler.Instance.OnStateChange += onStateChange;
+
     }
     bool IsDone;
     private void onStateChange(GAMESTATE arg1, GAMESTATE arg2)
@@ -38,8 +39,9 @@ public class PlayerHandler : MonoBehaviour
     float rotationDuration = 0.3f;
     public void spawnPlayer()
     {
-        Cordinate = StartCordinate;
-        transform.position = Vector3.zero;
+        StartCordinate = new Vector2(5,-1);
+        Cordinate = GridHandler.Instance.playerStartingPosition;
+        transform.position = GridHandler.Instance.playerStartingPosition;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -49,6 +51,12 @@ public class PlayerHandler : MonoBehaviour
             Animate.startAnimation(AnimationType.Death, onAnimationDone);
             //animation
             //Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Fall"))
+        {
+            //GameHandler.Instance.removeLife();
+            onAnimationDone();
         }
     }
     private void onAnimationDone()
@@ -64,6 +72,7 @@ public class PlayerHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (!CanMove) return;
         if (Input.GetKeyDown(KeyCode.A))
         {

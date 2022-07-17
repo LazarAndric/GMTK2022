@@ -8,8 +8,7 @@ public class CheckGameOver : MonoBehaviour
 
     public static event Action OnGameOver;
 
-    [SerializeField]
-    int idOfEndNode = 33;
+    int idOfEndNode = -1;
     [HideInInspector]
     public static List<Waypoint> waypointsList;
 
@@ -56,7 +55,7 @@ public class CheckGameOver : MonoBehaviour
 
         GraphNode <Waypoint> endNode = graph.Find(waypointNextToFinish);
         // if there is 1 end node and it is destroyed it is game over
-        if(endNode == null || startNode == null)
+        if(endNode == null)
         {
             OnGameOver?.Invoke();
             print("Game over, path can't be found");
