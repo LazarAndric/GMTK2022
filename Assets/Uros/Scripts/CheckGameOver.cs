@@ -46,7 +46,8 @@ public class CheckGameOver : MonoBehaviour
 
     public static void GameOver(Graph<Waypoint> graph, Waypoint w)
     {
-        
+        if (lastWaypoint == w)
+            return;
         waypointsList.Remove(w);
         SortedLinkedList<SearchNode<Waypoint>> searchList = new SortedLinkedList<SearchNode<Waypoint>>();
         
@@ -65,9 +66,10 @@ public class CheckGameOver : MonoBehaviour
         foreach (GraphNode<Waypoint> waypoint in graph.Nodes)
         {
             SearchNode<Waypoint> searchNode = new SearchNode<Waypoint>(waypoint);
-
-       
-
+            if (waypoint.Value == startNode.Value)
+            {
+                searchNode.Distance = 0;
+            }
             searchList.Add(searchNode);
 
             dictonarySearch.Add(waypoint, searchNode);
