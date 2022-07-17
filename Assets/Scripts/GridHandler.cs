@@ -146,7 +146,7 @@ public class GridHandler : MonoBehaviour
 
         CheckGameOver.GameOver(GraphBuilder.Graph, waypoint);
         ObjectForDestroy = plane.gameObject;
-        plane.Platofrm.SetActive(false);
+        plane.Platofrm.startAnimation(AnimationType.Death, () => plane.Platofrm.gameObject.SetActive(false));
         plane.Faces.ForEach(face => face.gameObject.SetActive(false));
         plane.AnimationHandler.startAnimation(AnimationType.Death, onDone);
     }
