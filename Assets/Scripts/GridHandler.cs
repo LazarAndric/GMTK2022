@@ -25,6 +25,8 @@ public class GridHandler : MonoBehaviour
     public int RotationAngle;
     public float Duration;
     public float WaitTime;
+    [Range(0f, 1f)]
+    public float Difficulty;
     private void Awake()
     {
         if(Instance==null)
@@ -80,6 +82,7 @@ public class GridHandler : MonoBehaviour
         int tempI = 0;
         Vector3 lastPosition = Vector3.zero;
         int length = NumberOfCells * NumberOfCells;
+        var list=RandomUtil.getAvgRandom(length, 0, PlaneBehaviours.Count - 1, Difficulty);
         for (int i = 0; i < length; i++)
         {
             if (tempI >= NumberOfCells)
@@ -91,7 +94,7 @@ public class GridHandler : MonoBehaviour
                 lastPosition = new Vector3(lastPosition.x, lastPosition.y, 0);
             }
             PlaneHandler cube = Instantiate(SpawnPrefab, transform);
-            cube.initializePlane(PlaneBehaviours[Random.Range(0, PlaneBehaviours.Count)], RotationAngle, Duration, WaitTime, TagForCollision);
+            cube.initializePlane(PlaneBehaviours[list[i]], RotationAngle, Duration, WaitTime, TagForCollision);
             cube.transform.position = lastPosition;
             AddPlaneToGraph(cube.gameObject, i);
             Positions.Add(new Vector2(x, y), cube.transform);
