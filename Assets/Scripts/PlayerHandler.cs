@@ -39,8 +39,9 @@ public class PlayerHandler : MonoBehaviour
     public void spawnPlayer()
     {
         StartCordinate = new Vector2(5,-1);
-        Cordinate = GridHandler.Instance.playerStartingPosition;
-        transform.position = GridHandler.Instance.playerStartingPosition;
+        Cordinate = StartCordinate;
+        if (tryGetPosition(Cordinate, out Vector3 postiion))
+            transform.position = postiion;
     }
     private void OnTriggerEnter(Collider other)
     {
