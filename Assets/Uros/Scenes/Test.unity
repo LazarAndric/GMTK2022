@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 860890475}
   - component: {fileID: 860890476}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,7 +332,7 @@ Transform:
   m_GameObject: {fileID: 860890469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.36, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -450,7 +450,7 @@ MonoBehaviour:
   offsetY: 0.1
   RotationAngle: -90
   Duration: 0.5
-  WaitTime: 1
+  WaitTime: 0.2
 --- !u!1 &1872818386
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 1872818387}
   - component: {fileID: 1872818391}
   - component: {fileID: 1872818393}
+  - component: {fileID: 1872818394}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -585,3 +586,17 @@ MonoBehaviour:
   numberOfEnemies: 3
   enemyPrefab: {fileID: 3177565899586197216, guid: 1729678ea25906940ab363b9c3b8cf97,
     type: 3}
+--- !u!114 &1872818394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872818386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3706b182dee7ee4aadad209c26cfddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitState: 0
+  TimerDuration: 0

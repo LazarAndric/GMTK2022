@@ -65,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        FindTarget();
+        Invoke("FindTarget", 0.02f);
     }
     //private void GoToNextTarget()
     //{
