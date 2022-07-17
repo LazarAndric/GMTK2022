@@ -37,7 +37,6 @@ public class GridHandler : MonoBehaviour
     public void initializePlaneBehaviour()
     {
         
-
         //PlaneType initialization
         PlaneType normalType = new PlaneType(Type.Normal, null);
         PlaneType surpriseType = new PlaneType(Type.Surprise, SurpriseTexture);
@@ -127,29 +126,32 @@ public class GridHandler : MonoBehaviour
         waypoint.Id = id;
         waypoitns.Add(waypoint);
     }
-
+    public GameObject ObjectForDestroy;
     private void Explode(PlaneHandler plane)
     {      
-        GameObject? player = plane.CurrentObject;
+        GameObject player = plane.CurrentObject;
         if (player != null)
         {
-            print("Game over");
             player.transform.DOKill();
             player.GetComponent<PlayerHandler>().CanMove = false; 
-            player.GetComponent<Rigidbody>().useGravity = true;           
+            player.GetComponent<Rigidbody>().useGravity = true;      
             GameHandler.Instance.removeLife();
-        }        
-        else
-        {
-            //remove node from graph
-            Waypoint waypoint = plane.Cube.GetComponentInParent<Waypoint>();
-            GraphBuilder.Graph.RemoveNode(waypoint);
-            //remove transform from dictanory
-            var myKey = Positions.FirstOrDefault(x => x.Value == waypoint.transform).Key;
-            Positions.Remove(myKey);  
+        }  
+        //remove node from graph
+        Waypoint waypoint = plane.Cube.GetComponentInParent<Waypoint>();
+        GraphBuilder.Graph.RemoveNode(waypoint);
+        //remove transform from dictanory
+        var myKey = Positions.FirstOrDefault(x => x.Value == waypoint.transform).Key;
+        Positions.Remove(myKey);  
 
-            CheckGameOver.GameOver(GraphBuilder.Graph, waypoint);
-        }
-        Destroy(plane.gameObject);
+        CheckGameOver.GameOver(GraphBuilder.Graph, waypoint);
+        ObjectForDestroy = plane.gameObject;
+        plane.Platofrm.SetActive(false);
+        plane.Faces.ForEach(face => face.gameObject.SetActive(false));
+        plane.AnimationHandler.startAnimation(AnimationType.Death, onDone);
+    }
+    public void onDone()
+    {
+        Destroy(ObjectForDestroy);
     }
 }

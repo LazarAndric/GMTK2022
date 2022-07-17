@@ -6,6 +6,8 @@ using System;
 
 public class PlaneHandler : MonoBehaviour
 {
+    public AnimationHandler AnimationHandler;
+    public GameObject Platofrm;
     public List<FaceControl> Faces = new List<FaceControl>();
     public ColliderControl ColliderControl;
     PlaneBehaviour PlaneBehaviour;

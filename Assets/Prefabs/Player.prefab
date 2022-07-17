@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f86c09eff0ab9341a4c159eff7cf4bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartPosition: {x: 0, y: 0, z: 0}
+  Animate: {fileID: 3926453904739001390}
   Cordinate: {x: 0, y: 0}
   DurationMove: 0.4
   Curve:
@@ -154,6 +156,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CanMove: 1
+  rotationDuration: 0.3
 --- !u!54 &8636090392836969785
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239,6 +242,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f722555dcec045141ad0d60eb69fa3af, type: 3}
+--- !u!114 &3926453904739001390 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 235553142608573275, guid: f722555dcec045141ad0d60eb69fa3af,
+    type: 3}
+  m_PrefabInstance: {fileID: 3835179365256189813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d853d2e5d90315140a86b8860589febb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5691461178893842108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8918651845541650889, guid: f722555dcec045141ad0d60eb69fa3af,

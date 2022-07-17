@@ -7,28 +7,30 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     private Animator Animator;
-    public Action OnDone;
-    public AnimationType CurrentAnimation;
+    private Action OnDone;
+    private AnimationType CurrentAnimation;
 
     public void Awake()
     {
         Animator = GetComponent<Animator>();
     }
-    public void startDeath(AnimationType animationType, Action onDone)
+    public void startAnimation(AnimationType animationType, Action onDone)
     {
-        OnDone= onDone;
+        Animator.SetBool("Reset", false);
+        Animator.SetBool(CurrentAnimation.ToString(), false);
+        OnDone = onDone;
         CurrentAnimation = animationType;
         Animator.SetBool(animationType.ToString(), true);
     }
-    public void onDone()
+    void onDone()
     {
         Animator.SetBool(CurrentAnimation.ToString(), false);
+        Animator.SetBool("Reset", true);
         OnDone?.Invoke();
     }
 }
 
 public enum AnimationType
 {
-    Reset,
     Death
 }
